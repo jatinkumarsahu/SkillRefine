@@ -1,5 +1,6 @@
 package com.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.model.dao.LoginValidator;
+import com.service.AppUserServiceImpl;
 
 @Controller
 public class MyController {
+	@Autowired
+	AppUserServiceImpl appUserSerice;
 
 	@RequestMapping("/")
 	public ModelAndView getWelcomePage() {
