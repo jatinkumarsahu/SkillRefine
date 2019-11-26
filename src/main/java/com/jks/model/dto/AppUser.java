@@ -61,4 +61,13 @@ public class AppUser {
 		this.userPassword = userPassword;
 	}
 
+	public AppUser(String firstName, String lastName, String userEmail, String userPassword) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userEmail = userEmail;
+		this.userPassword = userPassword;
+	}
+
+	
 }

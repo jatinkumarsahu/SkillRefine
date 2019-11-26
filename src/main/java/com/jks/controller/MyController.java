@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jks.model.dao.LoginValidator;
+import com.jks.model.dto.AppUser;
 import com.jks.service.AppUserServiceImpl;
 
 @Controller
@@ -26,6 +27,8 @@ public class MyController {
 	public ModelAndView validateUserLogin(@RequestParam("inputEmail") String email,
 			@RequestParam("inputPassword") String password) {
 		boolean isValid = new LoginValidator().validateCredentials(email, password);
+		new AppUserServiceImpl().saveUser(new AppUser("Jatin", "Sahu", email, password));
+		
 		ModelAndView mv = null;
 		if (isValid)
 			mv = new ModelAndView("login");
