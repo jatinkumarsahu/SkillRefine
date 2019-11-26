@@ -1,4 +1,4 @@
-package com.model.dao;
+package com.jks.model.dao;
 
 public class LoginValidator {
 

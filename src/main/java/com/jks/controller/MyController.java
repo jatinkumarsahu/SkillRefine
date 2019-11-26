@@ -1,4 +1,4 @@
-package com.controller;
+package com.jks.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.model.dao.LoginValidator;
-import com.service.AppUserServiceImpl;
+import com.jks.model.dao.LoginValidator;
+import com.jks.service.AppUserServiceImpl;
 
 @Controller
 public class MyController {

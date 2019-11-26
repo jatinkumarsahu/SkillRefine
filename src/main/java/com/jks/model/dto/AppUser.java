@@ -1,4 +1,4 @@
-package com.model.dto;
+package com.jks.model.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

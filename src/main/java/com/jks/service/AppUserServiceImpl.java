@@ -1,9 +1,9 @@
-package com.service;
+package com.jks.service;
 
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
-import com.model.dto.AppUser;
+import com.jks.model.dto.AppUser;
 
 @Service
 public class AppUserServiceImpl implements AppUserService{
