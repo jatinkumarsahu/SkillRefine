@@ -38,7 +38,7 @@ public class MyController {
 	}
 
 	@GetMapping("register.html")
-	public String hrefResolver() {
-		return "register";
+	public ModelAndView hrefResolver() {
+		return new ModelAndView("register");
 	}
 }
