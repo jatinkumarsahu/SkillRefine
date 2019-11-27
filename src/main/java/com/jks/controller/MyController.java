@@ -28,7 +28,7 @@ public class MyController {
 			@RequestParam("inputPassword") String password) {
 		//boolean isValid = new LoginValidator().validateCredentials(email, password);
 		appUserSericeImpl.saveOrUpdate(new AppUser("Jatin", "Sahu", email, password));
-		
+		appUserSericeImpl.validateLogin(email, password);
 		ModelAndView mv = new ModelAndView("login");;
 		/*
 		 * if (isValid) mv = new ModelAndView("login"); else mv = new

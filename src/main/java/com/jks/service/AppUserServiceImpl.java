@@ -9,16 +9,13 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 
 import com.jks.model.dto.AppUser;
 
 @Service
 public class AppUserServiceImpl implements AppUserService<AppUser> {
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
-
-	
 	private EntityManagerFactory entityManagerFactory;
 
 	public EntityManagerFactory getEntityManagerFactory() {
@@ -32,20 +29,18 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 
 	@Override
 	public List<AppUser> listAll() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public AppUser getById(Integer id) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public AppUser saveOrUpdate(AppUser domainObject) {
-		System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"+entityManagerFactory.getProperties());
-		System.out.println(jdbcTemplate.toString());
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(domainObject);
@@ -55,15 +50,18 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public boolean validateLogin(String emailId, String password) {
-		// TODO Auto-generated method stub
+		EntityManager em = entityManagerFactory.createEntityManager();
+		Query query = em.createQuery("FROM AppUser ap WHERE ap.userEmail = :aId and ap.userPassword = :aPwd");
+		query.setParameter("aId", emailId);
+		query.setParameter("aPwd", password);
+		AppUser result = (AppUser) query.getSingleResult();
+		System.err.println("HHHJJJ"+result);
 		return false;
 	}
-
 
 }
