@@ -15,6 +15,10 @@ public class AppUser {
 	String userEmail;
 	String userPassword;
 
+	public AppUser() {
+		super();
+	}
+
 	@Override
 	public String toString() {
 		return "AppUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userEmail=" + userEmail
@@ -69,5 +73,4 @@ public class AppUser {
 		this.userPassword = userPassword;
 	}
 
-	
 }

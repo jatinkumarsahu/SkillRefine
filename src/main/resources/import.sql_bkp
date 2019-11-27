@@ -1,3 +1,0 @@
-insert into APPUSER values(1, 'AA','EA','PA');
-insert into APPUSER values(2, 'BB','EB','PB');
-insert into APPUSER values(3, 'CC','EC','PC');
