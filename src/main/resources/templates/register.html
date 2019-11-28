@@ -49,24 +49,25 @@
 					</div>
 					<div class="form-group">
 						<div class="form-label-group">
-							<input type="email" oninput="validateRegisterUser()" id="inputEmail" name="userEmail"
+							<input type="email" onchange="checkEmailValidation()" oninput="validateRegisterUser()" id="inputEmail" name="userEmail"
 								class="form-control" placeholder="Email address"
 								required="required"> <label for="inputEmail">Email
 								address</label>
 						</div>
+						<p id="emailCheck"></p>
 					</div>
 					<div class="form-group">
 						<div class="form-row">
 							<div class="col-md-6">
 								<div class="form-label-group">
-									<input type="password" oninput="validateRegisterUser()" id="inputPassword" name="userPassword"
+									<input type="password" oninput="validatePassword()" id="inputPassword" name="userPassword"
 										class="form-control" placeholder="Password"
 										required="required"> <label for="inputPassword">Password</label>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-label-group">
-									<input type="password" oninput="validateRegisterUser()" id="confirmPassword"
+									<input type="password" oninput="validatePassword()" id="confirmPassword"
 										class="form-control" placeholder="Confirm password"
 										required="required"> <label for="confirmPassword">Confirm
 										password</label>

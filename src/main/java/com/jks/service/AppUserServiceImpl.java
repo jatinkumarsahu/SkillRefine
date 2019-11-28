@@ -2,8 +2,7 @@ package com.jks.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -11,6 +10,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import javax.persistence.RollbackException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import com.jks.model.dto.AppUser;
 
@@ -46,6 +50,7 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 		em.getTransaction().begin();
 		em.persist(domainObject);
 		em.getTransaction().commit();
+		em.close();
 		return domainObject;
 	}
 
@@ -62,6 +67,7 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 		query.setParameter("aPwd", password);
 		List<?> lUsers = query.getResultList();
 		System.err.println("HHHJJJ " + lUsers);
+		em.close();
 		if (lUsers.size() > 0)
 			return true;
 		else
@@ -70,8 +76,8 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 
 	public String createUser(AppUser appUser) {
 		String result;
+		EntityManager em = entityManagerFactory.createEntityManager();
 		try {
-			EntityManager em = entityManagerFactory.createEntityManager();
 			em.getTransaction().begin();
 			em.persist(appUser);
 			em.getTransaction().commit();
@@ -82,8 +88,29 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 				result = "Email Id Exists";
 			} else
 				result = "Some Error occured";
+		} finally {
+			em.close();
 		}
 		return result;
 	}
 
+	public boolean getUserByEmail(String email) {
+		EntityManager em = entityManagerFactory.createEntityManager();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<AppUser> cq = cb.createQuery(AppUser.class);
+
+		Root<AppUser> user = cq.from(AppUser.class);
+		Predicate emailPredicate = cb.equal(user.get("userEmail"), email);
+		cq.where(emailPredicate);
+
+		TypedQuery<AppUser> query = em.createQuery(cq);
+		System.out.println(email + " : " + query.getResultList());
+		if (query.getResultList().size() > 0) {
+			em.close();
+			return false;
+		} else {
+			em.close();
+			return true;
+		}
+	}
 }

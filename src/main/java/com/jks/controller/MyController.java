@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,5 +49,11 @@ public class MyController {
 	@GetMapping("register.html")
 	public ModelAndView hrefResolver() {
 		return new ModelAndView("register");
+	}
+	
+	@RequestMapping("/validateEmail/{email}")
+	public boolean getEmailValidation(@PathVariable String email){
+		boolean found = appUserSericeImpl.getUserByEmail(email);
+		return found;
 	}
 }
