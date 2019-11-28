@@ -22,7 +22,7 @@ public class MyController {
 	@RequestMapping("/")
 	public ModelAndView getWelcomePage() {
 		ModelAndView mView = new ModelAndView("login");
-		appUserSericeImpl.saveOrUpdate(new AppUser("Jatin", "Sahu", "j@j.com", "1234"));
+		//appUserSericeImpl.saveOrUpdate(new AppUser("Jatin", "Sahu", "j@j.com", "1234"));
 		return mView;
 	}
 

@@ -8,13 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SkillRefineApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SkillRefineApplication.class, args); 
+		SpringApplication.run(SkillRefineApplication.class, args);
 	}
- 
+
 }
 
-
-//handle unique email check
-//dynamic email check
-//confirm password
+//add spinner when form submitting
+//wrong email id password alert
+//add error page
 //enable logging
