@@ -60,26 +60,28 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 		Query query = em.createQuery("FROM AppUser ap WHERE ap.userEmail = :aId and ap.userPassword = :aPwd");
 		query.setParameter("aId", emailId);
 		query.setParameter("aPwd", password);
-		AppUser result = (AppUser) query.getSingleResult();
-		System.err.println("HHHJJJ"+result);
-		return false;
+		List<?> lUsers = query.getResultList();
+		System.err.println("HHHJJJ " + lUsers);
+		if (lUsers.size() > 0)
+			return true;
+		else
+			return false;
 	}
-	
+
 	public String createUser(AppUser appUser) {
 		String result;
 		try {
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
-		em.persist(appUser);
-		em.getTransaction().commit();
-		result = "success";
-		}catch (Exception e) {
+			EntityManager em = entityManagerFactory.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(appUser);
+			em.getTransaction().commit();
+			result = "success";
+		} catch (Exception e) {
 			e.printStackTrace();
-			if(e.getClass().isInstance(RollbackException.class)) {
+			if (e.getClass().isInstance(RollbackException.class)) {
 				result = "Email Id Exists";
-			}
-			else
-				result="Some Error occured";
+			} else
+				result = "Some Error occured";
 		}
 		return result;
 	}

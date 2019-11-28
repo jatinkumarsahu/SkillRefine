@@ -1,8 +1,8 @@
 package com.jks.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,24 +27,24 @@ public class MyController {
 
 	@RequestMapping("/validateLogin")
 	public ModelAndView validateUserLogin(@RequestParam("inputEmail") String email,
-			@RequestParam("inputPassword") String password) {
+			@RequestParam("inputPassword") String password, HttpServletRequest request) {
 		boolean isValid = appUserSericeImpl.validateLogin(email, password);
 		ModelAndView mv = new ModelAndView("login");
-
+		request.getSession().setAttribute("userEmail", email);
 		if (isValid)
-			mv = new ModelAndView("login");
+			mv = new ModelAndView("blank");
 		else
 			mv = new ModelAndView("login");
 
 		return mv;
 	}
-	
+
 	@RequestMapping("/signUp")
 	public ModelAndView registerUser(@ModelAttribute("appUser") AppUser appUser) {
 		appUserSericeImpl.createUser(appUser);
 		return new ModelAndView("login");
 	}
-	
+
 	@GetMapping("register.html")
 	public ModelAndView hrefResolver() {
 		return new ModelAndView("register");
