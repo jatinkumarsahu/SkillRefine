@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
+import javax.persistence.RollbackException;
 
 import com.jks.model.dto.AppUser;
 
@@ -62,6 +63,25 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 		AppUser result = (AppUser) query.getSingleResult();
 		System.err.println("HHHJJJ"+result);
 		return false;
+	}
+	
+	public String createUser(AppUser appUser) {
+		String result;
+		try {
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(appUser);
+		em.getTransaction().commit();
+		result = "success";
+		}catch (Exception e) {
+			e.printStackTrace();
+			if(e.getClass().isInstance(RollbackException.class)) {
+				result = "Email Id Exists";
+			}
+			else
+				result="Some Error occured";
+		}
+		return result;
 	}
 
 }

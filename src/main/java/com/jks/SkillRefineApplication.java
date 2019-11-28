@@ -15,5 +15,6 @@ public class SkillRefineApplication {
 }
 
 
-//https://www.devglan.com/spring-boot/spring-boot-h2-database-example
-//https://www.javatips.net/blog/hibernate-jpa-with-h2-database?page=2
+//handle unique email check
+//dynamic email check
+//confirm password
