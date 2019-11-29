@@ -32,7 +32,7 @@ public class MyController {
 		ModelAndView mv = new ModelAndView("login");
 		request.getSession().setAttribute("userEmail", email);
 		if (isValid) {
-			mv = new ModelAndView("blank");
+			mv = new ModelAndView("redirect:userDashBoard");
 		}
 		else {
 			mv = new ModelAndView("login");
@@ -40,6 +40,11 @@ public class MyController {
 		}
 
 		return mv;
+	}
+	
+	@RequestMapping("/userDashBoard")
+	public ModelAndView dashboard() {
+		return new ModelAndView("userDashBoard");
 	}
 
 	@RequestMapping("/signUp")

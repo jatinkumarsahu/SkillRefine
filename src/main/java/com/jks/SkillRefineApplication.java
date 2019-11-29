@@ -13,6 +13,6 @@ public class SkillRefineApplication {
 }
 
 
-//wrong email id password alert
+//handle sessions
 //add error page
 //enable logging
