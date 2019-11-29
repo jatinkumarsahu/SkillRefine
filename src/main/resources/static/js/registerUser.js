@@ -80,6 +80,8 @@ function submitForm(){
 				};
 				
 			} else {
+				formReg.style.display = "block";
+				spinner.style.display = "none";
 				emailCheck.innerHTML = "<font color='red'>&nbsp;E-mail already registered</font>";
 			}
 		}

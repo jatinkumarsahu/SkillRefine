@@ -16,3 +16,4 @@ public class SkillRefineApplication {
 //handle sessions
 //add error page
 //enable logging
+//add welcome username
