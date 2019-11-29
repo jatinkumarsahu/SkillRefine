@@ -36,7 +36,7 @@ public class MyController {
 		}
 		else {
 			mv = new ModelAndView("login");
-			mv.addObject("errorMessage", "<font color='red'>Wrong Id/Password !!!</font>");
+			mv.addObject("errorMessage", "Wrong Id/Password !!!");
 		}
 
 		return mv;
