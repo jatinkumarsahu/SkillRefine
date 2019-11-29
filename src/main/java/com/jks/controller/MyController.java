@@ -22,7 +22,6 @@ public class MyController {
 	@RequestMapping("/")
 	public ModelAndView getWelcomePage() {
 		ModelAndView mView = new ModelAndView("login");
-		//appUserSericeImpl.saveOrUpdate(new AppUser("Jatin", "Sahu", "j@j.com", "1234"));
 		return mView;
 	}
 
@@ -32,10 +31,13 @@ public class MyController {
 		boolean isValid = appUserSericeImpl.validateLogin(email, password);
 		ModelAndView mv = new ModelAndView("login");
 		request.getSession().setAttribute("userEmail", email);
-		if (isValid)
+		if (isValid) {
 			mv = new ModelAndView("blank");
-		else
+		}
+		else {
 			mv = new ModelAndView("login");
+			mv.addObject("errorMessage", "<font color='red'>Wrong Id/Password !!!</font>");
+		}
 
 		return mv;
 	}

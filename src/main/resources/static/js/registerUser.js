@@ -33,6 +33,14 @@ function validateRegisterUser() {
 }
 
 function submitForm(){
+	document.getElementById("submitButton").disabled = true;
+	
+	var spinner = document.getElementById("spinner");
+	var formReg = document.getElementById("formReg");
+	
+	formReg.style.display = "none";
+	spinner.style.display = "block";
+	
 	var firstName = document.getElementById("firstName");
 	var lastName = document.getElementById("lastName");
 	var emailAddress = document.getElementById("inputEmail");
@@ -55,14 +63,19 @@ function submitForm(){
 				xmlhttp1.send();
 				xmlhttp1.onreadystatechange = function() {
 					if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) {
-						console.log('submiiitt');
 						firstName.value="";
 						lastName.value="";
 						emailAddress.value=""; 
 						password.value=""; 
 						confirmPassword.value=""; 
 						emailCheck.innerHTML="";
+						formReg.style.display = "block";
+						spinner.style.display = "none";
 						message.innerHTML="<font color='green'><b>User Registered. </b> Please login <a href='http://localhost:8080/'>click here</a></font>";
+					}else{
+						formReg.style.display = "block";
+						spinner.style.display = "none";
+						message.innerHTML="<font color='red'>Something went wrong.!!!</font>";
 					}
 				};
 				

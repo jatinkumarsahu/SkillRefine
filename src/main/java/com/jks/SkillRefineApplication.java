@@ -13,7 +13,7 @@ public class SkillRefineApplication {
 
 }
 
-//add spinner when form submitting
+
 //wrong email id password alert
 //add error page
 //enable logging

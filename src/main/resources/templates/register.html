@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <script src="js/registerUser.js"></script>
-
+  <link rel="stylesheet" href="css/spinner.css">
   <title>SkillRefine-Register</title>
 
   <!-- Custom fonts for this template-->
@@ -21,12 +21,11 @@
 </head>
 
 <body class="bg-dark">
-
   <div class="container">
-    <div class="card card-register mx-auto mt-5">
+  <div style="display:none;" id="spinner" class="lds-facebook"><div></div><div></div><div></div></div>
+    <div id="formReg" class="card card-register mx-auto mt-5">
       <div class="card-header">Register an Account</div>
       <div class="card-body">
-				<!-- <form action="/signUp" method="post" > -->
 					<div class="form-group">
 						<div class="form-row">
 							<div class="col-md-6">
@@ -77,13 +76,13 @@
 					</div>
 					<p id="message"></p>
 					<input type="button" onclick="submitForm()" id="submitButton" class="btn btn-primary btn-block" value="Register" disabled>
-				<!-- </form> -->
 				<div class="text-center">
-          <a class="d-block small mt-3" href="login.html">Login Page</a>
+          <a class="d-block small mt-3" href="/">Login Page</a>
           <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
         </div>
       </div>
     </div>
+ 
   </div>
 
   <!-- Bootstrap core JavaScript-->
