@@ -17,6 +17,19 @@ public class QuestionAnswers {
 	String optionC;
 	String optionD;
 
+	public QuestionAnswers() {
+		super();
+	}
+
+	public QuestionAnswers(String question, String optionA, String optionB, String optionC, String optionD) {
+		super();
+		this.question = question;
+		this.optionA = optionA;
+		this.optionB = optionB;
+		this.optionC = optionC;
+		this.optionD = optionD;
+	}
+
 	public int getqId() {
 		return qId;
 	}
@@ -63,6 +76,12 @@ public class QuestionAnswers {
 
 	public void setOptionD(String optionD) {
 		this.optionD = optionD;
+	}
+
+	@Override
+	public String toString() {
+		return "QuestionAnswers [qId=" + qId + ", question=" + question + ", optionA=" + optionA + ", optionB="
+				+ optionB + ", optionC=" + optionC + ", optionD=" + optionD + "]";
 	}
 
 }

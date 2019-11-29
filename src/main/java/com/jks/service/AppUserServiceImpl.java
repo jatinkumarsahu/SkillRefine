@@ -1,5 +1,6 @@
 package com.jks.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,6 +18,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import com.jks.model.dto.AppUser;
+import com.jks.model.dto.QuestionAnswers;
+import com.jks.model.dto.TestPaper;
 
 @Service
 public class AppUserServiceImpl implements AppUserService<AppUser> {
@@ -46,9 +49,19 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 
 	@Override
 	public AppUser saveOrUpdate(AppUser domainObject) {
+		
+//		List<QuestionAnswers> lQuestionAnswers = new ArrayList<QuestionAnswers>();
+//		lQuestionAnswers.add(new QuestionAnswers("Q1","A1","B1","C1","D1"));
+//		lQuestionAnswers.add(new QuestionAnswers("Q2","A2","B2","C2","D2"));
+//		lQuestionAnswers.add(new QuestionAnswers("Q3","A3","B3","C3","D3"));
+//		lQuestionAnswers.add(new QuestionAnswers("Q4","A4","B4","C4","D4"));
+//		
+//		TestPaper tPaper = new TestPaper("TEST1",lQuestionAnswers);
+		
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(domainObject);
+		//em.persist(tPaper);
 		em.getTransaction().commit();
 		em.close();
 		return domainObject;
