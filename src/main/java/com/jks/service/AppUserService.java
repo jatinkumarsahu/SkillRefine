@@ -16,6 +16,10 @@ public interface AppUserService<AppUser> {
 	AppUser saveOrUpdate(AppUser domainObject);
 
 	void delete(Integer id);
-	
-	boolean validateLogin(String emailId, String password);
+
+	String validateLogin(String emailId, String password);
+
+	String createUser(AppUser appUser);
+
+	boolean getUserByEmail(String email);
 }

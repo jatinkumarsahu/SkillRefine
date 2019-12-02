@@ -17,3 +17,4 @@ public class SkillRefineApplication {
 //add error page
 //enable logging
 //add welcome username
+//activity log tab from logs

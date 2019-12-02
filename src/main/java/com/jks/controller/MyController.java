@@ -1,6 +1,9 @@
 package com.jks.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jks.model.dto.AppUser;
+import com.jks.model.dto.SubjectStreams;
+import com.jks.service.AppUserService;
 import com.jks.service.AppUserServiceImpl;
+import com.jks.service.TestCreaterService;
+import com.jks.service.TestCreaterServiceImpl;
 
 @RestController
 public class MyController {
 	@Autowired
-	AppUserServiceImpl appUserSericeImpl;
+	AppUserService<AppUser> appUserSerice;
+
+	@Autowired
+	TestCreaterService testCreaterService;
 
 	@RequestMapping("/")
 	public ModelAndView getWelcomePage() {
@@ -28,28 +38,33 @@ public class MyController {
 	@RequestMapping("/validateLogin")
 	public ModelAndView validateUserLogin(@RequestParam("inputEmail") String email,
 			@RequestParam("inputPassword") String password, HttpServletRequest request) {
-		boolean isValid = appUserSericeImpl.validateLogin(email, password);
+		String isValid = appUserSerice.validateLogin(email, password);
 		ModelAndView mv = new ModelAndView("login");
 		request.getSession().setAttribute("userEmail", email);
-		if (isValid) {
+		if (!isValid.equals("Not Found")) {
 			mv = new ModelAndView("redirect:userDashBoard");
-		}
-		else {
+			request.getSession().setAttribute("userEmail", email);
+			request.getSession().setAttribute("userName", isValid);
+		} else {
 			mv = new ModelAndView("login");
 			mv.addObject("errorMessage", "Wrong Id/Password !!!");
 		}
 
 		return mv;
 	}
-	
+
 	@RequestMapping("/userDashBoard")
-	public ModelAndView dashboard() {
-		return new ModelAndView("userDashBoard");
+	public ModelAndView dashboard(HttpSession session) {
+		ModelAndView mView = new ModelAndView("userDashBoard");
+		List<SubjectStreams> subjectStreams = testCreaterService.getAllSubjects();
+		mView.addObject("subjectList", subjectStreams);
+		mView.addObject("userName",session.getAttribute("userName"));
+		return mView;
 	}
 
 	@RequestMapping("/signUp")
 	public ModelAndView registerUser(@ModelAttribute("appUser") AppUser appUser) {
-		appUserSericeImpl.createUser(appUser);
+		appUserSerice.createUser(appUser);
 		return new ModelAndView("login");
 	}
 
@@ -57,10 +72,10 @@ public class MyController {
 	public ModelAndView hrefResolver() {
 		return new ModelAndView("register");
 	}
-	
+
 	@RequestMapping("/validateEmail/{email}")
-	public boolean getEmailValidation(@PathVariable String email){
-		boolean found = appUserSericeImpl.getUserByEmail(email);
+	public boolean getEmailValidation(@PathVariable String email) {
+		boolean found = appUserSerice.getUserByEmail(email);
 		return found;
 	}
 }

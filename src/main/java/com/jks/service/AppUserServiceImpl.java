@@ -3,7 +3,6 @@ package com.jks.service;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -19,6 +18,7 @@ import javax.persistence.criteria.Root;
 
 import com.jks.model.dto.AppUser;
 import com.jks.model.dto.QuestionAnswers;
+import com.jks.model.dto.SubjectStreams;
 import com.jks.model.dto.TestPaper;
 
 @Service
@@ -49,19 +49,9 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 
 	@Override
 	public AppUser saveOrUpdate(AppUser domainObject) {
-		
-//		List<QuestionAnswers> lQuestionAnswers = new ArrayList<QuestionAnswers>();
-//		lQuestionAnswers.add(new QuestionAnswers("Q1","A1","B1","C1","D1"));
-//		lQuestionAnswers.add(new QuestionAnswers("Q2","A2","B2","C2","D2"));
-//		lQuestionAnswers.add(new QuestionAnswers("Q3","A3","B3","C3","D3"));
-//		lQuestionAnswers.add(new QuestionAnswers("Q4","A4","B4","C4","D4"));
-//		
-//		TestPaper tPaper = new TestPaper("TEST1",lQuestionAnswers);
-		
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(domainObject);
-		//em.persist(tPaper);
 		em.getTransaction().commit();
 		em.close();
 		return domainObject;
@@ -73,20 +63,35 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 	}
 
 	@Override
-	public boolean validateLogin(String emailId, String password) {
+	public String validateLogin(String emailId, String password) {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		Query query = em.createQuery("FROM AppUser ap WHERE ap.userEmail = :aId and ap.userPassword = :aPwd");
 		query.setParameter("aId", emailId);
 		query.setParameter("aPwd", password);
-		List<?> lUsers = query.getResultList();
+		@SuppressWarnings("unchecked")
+		List<AppUser> lUsers = query.getResultList();
 		System.err.println("HHHJJJ " + lUsers);
+		
+//		em.getTransaction().begin();
+//		List<QuestionAnswers> lQuestionAnswers = new ArrayList<QuestionAnswers>();
+//		lQuestionAnswers.add(new QuestionAnswers("Q1", "A1", "B1", "C1", "D1"));
+//		lQuestionAnswers.add(new QuestionAnswers("Q2", "A2", "B2", "C2", "D2"));
+//		lQuestionAnswers.add(new QuestionAnswers("Q3", "A3", "B3", "C3", "D3"));
+//		lQuestionAnswers.add(new QuestionAnswers("Q4", "A4", "B4", "C4", "D4"));
+//		SubjectStreams streams = new SubjectStreams("C++");
+//		streams.setSubjectID(998);
+//		TestPaper tPaper = new TestPaper("TEST1", lQuestionAnswers, streams);
+//		em.merge(tPaper);
+//		em.getTransaction().commit();
+
 		em.close();
 		if (lUsers.size() > 0)
-			return true;
+			return lUsers.get(0).getFirstName();
 		else
-			return false;
+			return "Not Found";
 	}
 
+	@Override
 	public String createUser(AppUser appUser) {
 		String result;
 		EntityManager em = entityManagerFactory.createEntityManager();
@@ -107,6 +112,7 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 		return result;
 	}
 
+	@Override
 	public boolean getUserByEmail(String email) {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
