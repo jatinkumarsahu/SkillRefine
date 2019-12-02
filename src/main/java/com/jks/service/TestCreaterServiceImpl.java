@@ -37,7 +37,6 @@ public class TestCreaterServiceImpl implements TestCreaterService {
 		Query query = em.createQuery("FROM SubjectStreams");
 		@SuppressWarnings("unchecked")
 		List<SubjectStreams> subjectsList = query.getResultList();
-		System.err.println("HHHJJJ " + subjectsList);
 		em.close();
 		return subjectsList;
 	}

@@ -70,7 +70,6 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 		query.setParameter("aPwd", password);
 		@SuppressWarnings("unchecked")
 		List<AppUser> lUsers = query.getResultList();
-		System.err.println("HHHJJJ " + lUsers);
 		
 //		em.getTransaction().begin();
 //		List<QuestionAnswers> lQuestionAnswers = new ArrayList<QuestionAnswers>();
