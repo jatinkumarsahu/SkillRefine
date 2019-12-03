@@ -16,18 +16,10 @@ public class QuestionAnswers {
 	String optionB;
 	String optionC;
 	String optionD;
+	String correctOption;
 
 	public QuestionAnswers() {
 		super();
-	}
-
-	public QuestionAnswers(String question, String optionA, String optionB, String optionC, String optionD) {
-		super();
-		this.question = question;
-		this.optionA = optionA;
-		this.optionB = optionB;
-		this.optionC = optionC;
-		this.optionD = optionD;
 	}
 
 	public int getqId() {
@@ -78,10 +70,29 @@ public class QuestionAnswers {
 		this.optionD = optionD;
 	}
 
+	public String getCorrectOption() {
+		return correctOption;
+	}
+
+	public void setCorrectOption(String correctOption) {
+		this.correctOption = correctOption;
+	}
+
+	public QuestionAnswers(String question, String optionA, String optionB, String optionC, String optionD,
+			String correctOption) {
+		super();
+		this.question = question;
+		this.optionA = optionA;
+		this.optionB = optionB;
+		this.optionC = optionC;
+		this.optionD = optionD;
+		this.correctOption = correctOption;
+	}
+
 	@Override
 	public String toString() {
 		return "QuestionAnswers [qId=" + qId + ", question=" + question + ", optionA=" + optionA + ", optionB="
-				+ optionB + ", optionC=" + optionC + ", optionD=" + optionD + "]";
+				+ optionB + ", optionC=" + optionC + ", optionD=" + optionD + ", correctOption=" + correctOption + "]";
 	}
 
 }

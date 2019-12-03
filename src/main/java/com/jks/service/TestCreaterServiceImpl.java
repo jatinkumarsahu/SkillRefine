@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.jks.model.dto.AppUser;
 import com.jks.model.dto.SubjectStreams;
+import com.jks.model.dto.TestPaper;
 
 @Service
 public class TestCreaterServiceImpl implements TestCreaterService {
@@ -39,6 +40,36 @@ public class TestCreaterServiceImpl implements TestCreaterService {
 		List<SubjectStreams> subjectsList = query.getResultList();
 		em.close();
 		return subjectsList;
+	}
+
+	@Override
+	public String submitTest() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String createTest(TestPaper tPaper) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deletTest(int testId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<TestPaper> getAllTestForSubject(String subject) {
+		EntityManager em = entityManagerFactory.createEntityManager();
+		Query query = em.createQuery("FROM TestPaper t where t.streams.streamName = :subject");
+		query.setParameter("subject", subject);
+		@SuppressWarnings("unchecked")
+		List<TestPaper> subjectTests = query.getResultList();
+		em.close();
+		System.out.println(subjectTests);
+		return subjectTests; 
 	}
 
 }

@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,9 @@ public class TestPaper {
 
 	String testTitle;
 
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
+	int totalQuestions;
+
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true,fetch = FetchType.EAGER)
 	@JoinColumn(name = "test_id")
 	List<QuestionAnswers> questionListWithAnswers;
 
@@ -32,21 +35,6 @@ public class TestPaper {
 
 	public TestPaper() {
 		super();
-	}
-
-	public SubjectStreams getStreams() {
-		return streams;
-	}
-
-	public void setStreams(SubjectStreams streams) {
-		this.streams = streams;
-	}
-
-	public TestPaper(String testTitle, List<QuestionAnswers> questionListWithAnswers, SubjectStreams streams) {
-		super();
-		this.testTitle = testTitle;
-		this.questionListWithAnswers = questionListWithAnswers;
-		this.streams = streams;
 	}
 
 	public int getTestId() {
@@ -65,6 +53,14 @@ public class TestPaper {
 		this.testTitle = testTitle;
 	}
 
+	public int getTotalQuestions() {
+		return totalQuestions;
+	}
+
+	public void setTotalQuestions(int totalQuestions) {
+		this.totalQuestions = totalQuestions;
+	}
+
 	public List<QuestionAnswers> getQuestionListWithAnswers() {
 		return questionListWithAnswers;
 	}
@@ -73,10 +69,27 @@ public class TestPaper {
 		this.questionListWithAnswers = questionListWithAnswers;
 	}
 
+	public SubjectStreams getStreams() {
+		return streams;
+	}
+
+	public void setStreams(SubjectStreams streams) {
+		this.streams = streams;
+	}
+
+	public TestPaper(String testTitle, int totalQuestions, List<QuestionAnswers> questionListWithAnswers,
+			SubjectStreams streams) {
+		super();
+		this.testTitle = testTitle;
+		this.totalQuestions = totalQuestions;
+		this.questionListWithAnswers = questionListWithAnswers;
+		this.streams = streams;
+	}
+
 	@Override
 	public String toString() {
-		return "TestPaper [testId=" + testId + ", testTitle=" + testTitle + ", questionListWithAnswers="
-				+ questionListWithAnswers + ", streams=" + streams + "]";
+		return "TestPaper [testId=" + testId + ", testTitle=" + testTitle + ", totalQuestions=" + totalQuestions
+				+ ", questionListWithAnswers=" + questionListWithAnswers + ", streams=" + streams + "]";
 	}
 
 }

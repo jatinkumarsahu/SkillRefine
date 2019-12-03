@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jks.model.dto.AppUser;
 import com.jks.model.dto.SubjectStreams;
+import com.jks.model.dto.TestPaper;
 import com.jks.service.AppUserService;
 import com.jks.service.AppUserServiceImpl;
 import com.jks.service.TestCreaterService;
@@ -28,6 +29,8 @@ public class MyController {
 
 	@Autowired
 	TestCreaterService testCreaterService;
+	
+	static List<SubjectStreams> subjectStreams;
 
 	@RequestMapping("/")
 	public ModelAndView getWelcomePage() {
@@ -56,7 +59,7 @@ public class MyController {
 	@RequestMapping("/userDashBoard")
 	public ModelAndView dashboard(HttpSession session) {
 		ModelAndView mView = new ModelAndView("userDashBoard");
-		List<SubjectStreams> subjectStreams = testCreaterService.getAllSubjects();
+		subjectStreams = testCreaterService.getAllSubjects();
 		mView.addObject("subjectList", subjectStreams);
 		mView.addObject("userName",session.getAttribute("userName"));
 		return mView;
@@ -78,4 +81,16 @@ public class MyController {
 		boolean found = appUserSerice.getUserByEmail(email);
 		return found;
 	}
+	
+	@RequestMapping("/userDashBoard/{subject}")
+	public ModelAndView getSubjectTests(@PathVariable("subject") String subject, HttpSession session) {
+		System.out.println(subject);
+		List<TestPaper> papers = testCreaterService.getAllTestForSubject(subject);
+		ModelAndView modelAndView = new ModelAndView("TestList");
+		modelAndView.addObject("testPaperList", papers);
+		modelAndView.addObject("subjectList", subjectStreams);
+		modelAndView.addObject("currentSubject",subject);
+		//modelAndView.addObject("userName",session.getAttribute("userName"));
+		return modelAndView;
+	} 
 }

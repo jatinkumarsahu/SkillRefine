@@ -3,6 +3,7 @@ package com.jks.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.sql.Insert;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -64,13 +65,14 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 
 	@Override
 	public String validateLogin(String emailId, String password) {
+		insertSampleTest();
 		EntityManager em = entityManagerFactory.createEntityManager();
 		Query query = em.createQuery("FROM AppUser ap WHERE ap.userEmail = :aId and ap.userPassword = :aPwd");
 		query.setParameter("aId", emailId);
 		query.setParameter("aPwd", password);
 		@SuppressWarnings("unchecked")
 		List<AppUser> lUsers = query.getResultList();
-		
+
 //		em.getTransaction().begin();
 //		List<QuestionAnswers> lQuestionAnswers = new ArrayList<QuestionAnswers>();
 //		lQuestionAnswers.add(new QuestionAnswers("Q1", "A1", "B1", "C1", "D1"));
@@ -130,5 +132,21 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 			em.close();
 			return true;
 		}
+	}
+
+	public void insertSampleTest() {
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+		List<QuestionAnswers> lQuestionAnswers = new ArrayList<QuestionAnswers>();
+		lQuestionAnswers.add(new QuestionAnswers("Q1", "A1", "B1", "C1", "D1", "A1"));
+		lQuestionAnswers.add(new QuestionAnswers("Q2", "A2", "B2", "C2", "D2", "B1"));
+		lQuestionAnswers.add(new QuestionAnswers("Q3", "A3", "B3", "C3", "D3", "C1"));
+		lQuestionAnswers.add(new QuestionAnswers("Q4", "A4", "B4", "C4", "D4", "D1"));
+		SubjectStreams streams = new SubjectStreams("Java");
+		streams.setSubjectID(996);
+		TestPaper tPaper = new TestPaper("TEST1", 4, lQuestionAnswers, streams);
+		em.merge(tPaper);
+		em.getTransaction().commit();
+		em.close();
 	}
 }
