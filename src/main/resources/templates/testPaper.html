@@ -10,8 +10,8 @@
 
   <script>
     var message = "[[${testPaper}]]";
-    alert('Hii'+message);
-    //showAlert(message);
+    alert('Hii'+message.replace(/&quot;/g,'"'));
+    console.log(message.replace(/&quot;/g,'"'));
   </script>
   <script src="/js/testAttempt.js"></script>
   

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jks.model.dto.AppUser;
 import com.jks.model.dto.SubjectStreams;
 import com.jks.model.dto.TestPaper;
@@ -99,11 +102,20 @@ public class MyController {
 
 	@RequestMapping("/startTest/{testId}")
 	public ModelAndView getQuestions(@PathVariable("testId") int testId) {
-		TestPaper tp = testCreaterService.getTestPaperById(testId);
 		ModelAndView mv = new ModelAndView("testPaper");
-		System.out.println(tp.toString());
-		mv.addObject("testPaper", tp.toString());
+		try {
+			TestPaper tp = testCreaterService.getTestPaperById(testId);
+			ObjectMapper mapper = new ObjectMapper();
+			mv.addObject("testPaper", mapper.writeValueAsString(tp));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		return mv;
 	}
 
+	@RequestMapping("/test/{testId}")
+	public TestPaper getQuestions111(@PathVariable("testId") int testId) {
+		TestPaper tp = testCreaterService.getTestPaperById(testId);
+		return tp;
+	}
 }
