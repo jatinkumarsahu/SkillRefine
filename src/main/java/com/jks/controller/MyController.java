@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,13 +30,17 @@ public class MyController {
 
 	@Autowired
 	TestCreaterService testCreaterService;
-	
-	static List<SubjectStreams> subjectStreams;
 
 	@RequestMapping("/")
 	public ModelAndView getWelcomePage() {
 		ModelAndView mView = new ModelAndView("login");
 		return mView;
+	}
+
+	@ModelAttribute
+	public void addCommonObjects(Model model) {
+		List<SubjectStreams> subjectStreams = testCreaterService.getAllSubjects();
+		model.addAttribute("subjectList", subjectStreams);
 	}
 
 	@RequestMapping("/validateLogin")
@@ -52,16 +57,12 @@ public class MyController {
 			mv = new ModelAndView("login");
 			mv.addObject("errorMessage", "Wrong Id/Password !!!");
 		}
-
 		return mv;
 	}
 
 	@RequestMapping("/userDashBoard")
 	public ModelAndView dashboard(HttpSession session) {
 		ModelAndView mView = new ModelAndView("userDashBoard");
-		subjectStreams = testCreaterService.getAllSubjects();
-		mView.addObject("subjectList", subjectStreams);
-		mView.addObject("userName",session.getAttribute("userName"));
 		return mView;
 	}
 
@@ -81,16 +82,15 @@ public class MyController {
 		boolean found = appUserSerice.getUserByEmail(email);
 		return found;
 	}
-	
+
 	@RequestMapping("/userDashBoard/{subject}")
 	public ModelAndView getSubjectTests(@PathVariable("subject") String subject, HttpSession session) {
 		System.out.println(subject);
 		List<TestPaper> papers = testCreaterService.getAllTestForSubject(subject);
 		ModelAndView modelAndView = new ModelAndView("TestList");
 		modelAndView.addObject("testPaperList", papers);
-		modelAndView.addObject("subjectList", subjectStreams);
-		modelAndView.addObject("currentSubject",subject);
-		//modelAndView.addObject("userName",session.getAttribute("userName"));
+		modelAndView.addObject("currentSubject", subject);
+		// modelAndView.addObject("userName",session.getAttribute("userName"));
 		return modelAndView;
-	} 
+	}
 }

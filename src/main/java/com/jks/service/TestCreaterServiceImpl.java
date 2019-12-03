@@ -6,15 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Service;
 
-import com.jks.model.dto.AppUser;
 import com.jks.model.dto.SubjectStreams;
 import com.jks.model.dto.TestPaper;
 
@@ -44,19 +38,18 @@ public class TestCreaterServiceImpl implements TestCreaterService {
 
 	@Override
 	public String submitTest() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public String createTest(TestPaper tPaper) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public void deletTest(int testId) {
-		// TODO Auto-generated method stub
 		
 	}
 
