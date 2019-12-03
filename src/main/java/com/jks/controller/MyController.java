@@ -19,9 +19,7 @@ import com.jks.model.dto.AppUser;
 import com.jks.model.dto.SubjectStreams;
 import com.jks.model.dto.TestPaper;
 import com.jks.service.AppUserService;
-import com.jks.service.AppUserServiceImpl;
 import com.jks.service.TestCreaterService;
-import com.jks.service.TestCreaterServiceImpl;
 
 @RestController
 public class MyController {
@@ -62,6 +60,11 @@ public class MyController {
 
 	@RequestMapping("/userDashBoard")
 	public ModelAndView dashboard(HttpSession session) {
+		if (session.getAttribute("userEmail") == null) {
+			ModelAndView mView = new ModelAndView("login");
+			return mView;
+		}
+
 		ModelAndView mView = new ModelAndView("userDashBoard");
 		return mView;
 	}
@@ -87,10 +90,20 @@ public class MyController {
 	public ModelAndView getSubjectTests(@PathVariable("subject") String subject, HttpSession session) {
 		System.out.println(subject);
 		List<TestPaper> papers = testCreaterService.getAllTestForSubject(subject);
-		ModelAndView modelAndView = new ModelAndView("TestList");
+		ModelAndView modelAndView = new ModelAndView("testList");
 		modelAndView.addObject("testPaperList", papers);
 		modelAndView.addObject("currentSubject", subject);
 		// modelAndView.addObject("userName",session.getAttribute("userName"));
 		return modelAndView;
 	}
+
+	@RequestMapping("/startTest/{testId}")
+	public ModelAndView getQuestions(@PathVariable("testId") int testId) {
+		TestPaper tp = testCreaterService.getTestPaperById(testId);
+		ModelAndView mv = new ModelAndView("testPaper");
+		System.out.println(tp.toString());
+		mv.addObject("testPaper", tp.toString());
+		return mv;
+	}
+
 }

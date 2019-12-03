@@ -38,31 +38,50 @@ public class TestCreaterServiceImpl implements TestCreaterService {
 
 	@Override
 	public String submitTest() {
-		
+
 		return null;
 	}
 
 	@Override
 	public String createTest(TestPaper tPaper) {
-		
+
 		return null;
 	}
 
 	@Override
 	public void deletTest(int testId) {
-		
+
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TestPaper> getAllTestForSubject(String subject) {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		Query query = em.createQuery("FROM TestPaper t where t.streams.streamName = :subject");
 		query.setParameter("subject", subject);
-		@SuppressWarnings("unchecked")
 		List<TestPaper> subjectTests = query.getResultList();
 		em.close();
 		System.out.println(subjectTests);
-		return subjectTests; 
+		return subjectTests;
+	}
+
+	@Override
+	public TestPaper getTestPaperById(int testId) {
+		
+		EntityManager em = entityManagerFactory.createEntityManager();
+		Query query = em.createQuery("FROM TestPaper t where t.testId = :tId");
+		query.setParameter("tId", testId);
+		@SuppressWarnings("unchecked")
+		List<TestPaper> subjectTests = query.getResultList();
+		em.close();
+		
+		for (TestPaper tp : subjectTests) {
+			if (tp.getTestId() == testId) {
+				System.out.println(tp);
+				return tp;
+			}
+		}
+		return null;
 	}
 
 }

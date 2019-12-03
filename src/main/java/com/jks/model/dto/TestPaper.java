@@ -26,7 +26,7 @@ public class TestPaper {
 
 	int totalQuestions;
 
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true,fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "test_id")
 	List<QuestionAnswers> questionListWithAnswers;
 

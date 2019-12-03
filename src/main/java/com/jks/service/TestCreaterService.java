@@ -20,5 +20,7 @@ public interface TestCreaterService {
 	public void deletTest(int testId);
 	
 	public List<TestPaper> getAllTestForSubject(String subject);
+	
+	public TestPaper getTestPaperById(int testId);
 
 }

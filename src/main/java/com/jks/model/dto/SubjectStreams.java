@@ -37,11 +37,6 @@ public class SubjectStreams {
 		this.streamName = streamName;
 	}
 
-	@Override
-	public String toString() {
-		return "SubjectStreams [subjectID=" + subjectID + ", streamName=" + streamName + "]";
-	}
-
 	public SubjectStreams(String streamName) {
 		super();
 		this.streamName = streamName;
@@ -49,6 +44,11 @@ public class SubjectStreams {
 
 	public SubjectStreams() {
 		super();
+	}
+
+	@Override
+	public String toString() {
+		return "SubjectStreams [subjectID=" + subjectID + ", streamName=" + streamName + "]";
 	}
 
 }
