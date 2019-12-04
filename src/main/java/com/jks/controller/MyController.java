@@ -113,9 +113,9 @@ public class MyController {
 		return mv;
 	}
 
-	@RequestMapping("/test/{testId}")
-	public TestPaper getQuestions111(@PathVariable("testId") int testId) {
-		TestPaper tp = testCreaterService.getTestPaperById(testId);
-		return tp;
-	}
+	/*
+	 * @RequestMapping("/test/{testId}") public TestPaper
+	 * getQuestions111(@PathVariable("testId") int testId) { TestPaper tp =
+	 * testCreaterService.getTestPaperById(testId); return tp; }
+	 */
 }

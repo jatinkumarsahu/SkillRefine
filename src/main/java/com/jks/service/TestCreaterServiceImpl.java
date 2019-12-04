@@ -66,8 +66,7 @@ public class TestCreaterServiceImpl implements TestCreaterService {
 	}
 
 	@Override
-	public TestPaper getTestPaperById(int testId) {
-		
+	public TestPaper getTestPaperById(int testId) {		
 		EntityManager em = entityManagerFactory.createEntityManager();
 		Query query = em.createQuery("FROM TestPaper t where t.testId = :tId");
 		query.setParameter("tId", testId);

@@ -7,13 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
-  <script>
-    var message = "[[${testPaper}]]";
-    alert('Hii'+message.replace(/&quot;/g,'"'));
-    console.log(message.replace(/&quot;/g,'"'));
-  </script>
-  <script src="/js/testAttempt.js"></script>
   
   <title>SB Admin - Blank Page</title>
 
@@ -91,8 +84,14 @@
         <hr>
         
         
-          <p th:text="${testPaper}"></p> 
-
+ <!--          <p th:text="${testPaper}"></p>  -->
+			<div id="questionsDiv">
+			<table style="width:100%;font-size:13px;margin:10px"  id="questionTab">
+			</table>
+			<br>
+			<input type="button" style="width:50%;margin:auto" onclick="" id="submitButton" class="btn btn-primary btn-block" value="Finish Test">
+			<br>
+			</div>
       </div>
       <!-- /.container-fluid -->
 
@@ -100,7 +99,7 @@
       <footer class="sticky-footer">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright © Your Website 2019</span>
+            <span>Copyright © Skill Refine 2019</span>
           </div>
         </div>
       </footer>
@@ -144,7 +143,10 @@
 
   <!-- Custom scripts for all pages-->
   <script th:src="@{/js/sb-admin.min.js}"></script>
-
+  <script>
+    var message = "[[${testPaper}]]";
+  </script>
+  <script src="/js/testAttempt.js"></script>
 </body>
 
 </html>

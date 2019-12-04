@@ -138,10 +138,10 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
 		List<QuestionAnswers> lQuestionAnswers = new ArrayList<QuestionAnswers>();
-		lQuestionAnswers.add(new QuestionAnswers("Q1", "A1", "B1", "C1", "D1", "A1"));
-		lQuestionAnswers.add(new QuestionAnswers("Q2", "A2", "B2", "C2", "D2", "B1"));
-		lQuestionAnswers.add(new QuestionAnswers("Q3", "A3", "B3", "C3", "D3", "C1"));
-		lQuestionAnswers.add(new QuestionAnswers("Q4", "A4", "B4", "C4", "D4", "D1"));
+		lQuestionAnswers.add(new QuestionAnswers("An expression involving byte, int, and literal numbers is promoted to which of these?", "A1", "B1", "C1", "D1", "A1"));
+		lQuestionAnswers.add(new QuestionAnswers("Which data type value is returned by all transcendental math functions?", "A2", "B2", "C2", "D2", "B1"));
+		lQuestionAnswers.add(new QuestionAnswers("Which of these coding types is used for data type characters in Java?", "A3", "B3", "C3", "D3", "C1"));
+		lQuestionAnswers.add(new QuestionAnswers("Which of these occupy first 0 to 127 in Unicode character set used for characters in Java?", "A4", "B4", "C4", "D4", "D1"));
 		SubjectStreams streams = new SubjectStreams("Java");
 		streams.setSubjectID(996);
 		TestPaper tPaper = new TestPaper("TEST1", 4, lQuestionAnswers, streams);
