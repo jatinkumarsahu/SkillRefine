@@ -86,11 +86,14 @@
         
  <!--          <p th:text="${testPaper}"></p>  -->
 			<div id="questionsDiv">
+			<form action="/submitTest">
+			<font size="4px" color="#666666" style="font-weight: bold;margin:10px" id="testTitle"></font>
 			<table style="width:100%;font-size:13px;margin:10px"  id="questionTab">
 			</table>
 			<br>
-			<input type="button" style="width:50%;margin:auto" onclick="" id="submitButton" class="btn btn-primary btn-block" value="Finish Test">
+			<input type="submit" style="width:50%;margin:auto" onclick="" id="submitButton" class="btn btn-primary btn-block" value="Finish Test">
 			<br>
+			</form>
 			</div>
       </div>
       <!-- /.container-fluid -->

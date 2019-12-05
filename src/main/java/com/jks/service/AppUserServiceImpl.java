@@ -144,7 +144,7 @@ public class AppUserServiceImpl implements AppUserService<AppUser> {
 		lQuestionAnswers.add(new QuestionAnswers("Which of these occupy first 0 to 127 in Unicode character set used for characters in Java?", "A4", "B4", "C4", "D4", "D1"));
 		SubjectStreams streams = new SubjectStreams("Java");
 		streams.setSubjectID(996);
-		TestPaper tPaper = new TestPaper("TEST1", 4, lQuestionAnswers, streams);
+		TestPaper tPaper = new TestPaper("Java Data Types Questions", 4, lQuestionAnswers, streams);
 		em.merge(tPaper);
 		em.getTransaction().commit();
 		em.close();
